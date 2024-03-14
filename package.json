@@ -1,0 +1,16 @@
+{
+  "name": "MMM-GoogleMapGpx",
+  "description": "A Widget that will show a GPS path on google maps",
+  "keywords": [
+    "mirror",
+    "smart mirror",
+    "GPS",
+    "mirror Google Maps"
+  ],
+  "version": "0.0.1",
+  "dependencies": {
+    "text-to-image": "latest",
+    "http": "latest",
+    "https": "latest"
+  }
+}
