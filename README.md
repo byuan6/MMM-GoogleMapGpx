@@ -19,7 +19,8 @@ I upload both a origin and path file to a URL, and update the config to reflect 
 
 | Path                     |  
 :-------------------------:|
-![](https://raw.githubusercontent.com/studio-1b/MMM-GoogleMapGpx/main/docs/MMM-GoogleMapGpx%20Screenshot%20from%202024-03-13%2022-29-30.png)  
+![](https://raw.githubusercontent.com/studio-1b/MMM-GoogleMapGpx/main/docs/MMM-GoogleMapGpx.Screenshot%20from%202024-03-13%2022-29-30.png). 
+
 
 > [!NOTE]
 > Uses Google Maps Geocode API, to get addresses from coordinates.
