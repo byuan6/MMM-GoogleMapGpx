@@ -129,27 +129,31 @@ The path json file, in the URL pointed to, in path configuration can look below,
 
 ```js
 [
-{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:38.000Z","ept":0.005,"lat":49.19041,"lon":-123.081038333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":158.12,"speed":2.361,"climb":-0.1,"eps":23.22,"epc":69},{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:39.000Z","ept":0.005,"lat":49.190393333,"lon":-123.081023333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":137.56,"speed":2.027,"climb":0,"eps":23.22,"epc":69},{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:40.000Z","ept":0.005,"lat":49.190383333,"lon":-123.081001667,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":114.46,"speed":1.945,"climb":0,"eps":23.22,"epc":69},{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:41.000Z","ept":0.005,"lat":49.19038,"lon":-123.080978333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":97.01,"speed":1.667,"climb":0,"eps":23.22,"epc":69}
+{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:38.000Z","ept":0.005,"lat":49.19041,"lon":-123.081038333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":158.12,"speed":2.361,"climb":-0.1,"eps":23.22,"epc":69},
+{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:39.000Z","ept":0.005,"lat":49.190393333,"lon":-123.081023333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":137.56,"speed":2.027,"climb":0,"eps":23.22,"epc":69},
+{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:40.000Z","ept":0.005,"lat":49.190383333,"lon":-123.081001667,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":114.46,"speed":1.945,"climb":0,"eps":23.22,"epc":69},
+{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:41.000Z","ept":0.005,"lat":49.19038,"lon":-123.080978333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":97.01,"speed":1.667,"climb":0,"eps":23.22,"epc":69}
 ]
 ```
 
 The data was generated above
 
 ```bash
-/usr/bin/gpspipe -w
+gpspipe -w
 ```
 
 which creates data that looks like above, but without commas between records or the array brackets surrounding the entire file.  Like below
 
 ```js
 {"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:38.000Z","ept":0.005,"lat":49.19041,"lon":-123.081038333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":158.12,"speed":2.361,"climb":-0.1,"eps":23.22,"epc":69}
-{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:39.000Z","ept":0.005,"lat":49.190393333,"lon":-123.081023333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":137.56,"speed":2.027,"climb":0,"eps":23.22,"epc":69}{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:40.000Z","ept":0.005,"lat":49.190383333,"lon":-123.081001667,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":114.46,"speed":1.945,"climb":0,"eps":23.22,"epc":69}
+{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:39.000Z","ept":0.005,"lat":49.190393333,"lon":-123.081023333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":137.56,"speed":2.027,"climb":0,"eps":23.22,"epc":69}
+{"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:40.000Z","ept":0.005,"lat":49.190383333,"lon":-123.081001667,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":114.46,"speed":1.945,"climb":0,"eps":23.22,"epc":69}
 ... other record types too
 {"class":"TPV","device":"/dev/ttyUSB0","mode":3,"time":"2024-02-29T21:56:41.000Z","ept":0.005,"lat":49.19038,"lon":-123.080978333,"alt":-0.1,"epx":7.546,"epy":11.611,"epv":34.5,"track":97.01,"speed":1.667,"climb":0,"eps":23.22,"epc":69}
 ```
 
-to create the data as the path file requires, grep can filter only for TPV records, and the jq file can wrap the output in brackets and places commas between the records
+to create the data as the path file requires, grep can filter only for TPV records, and the jq command can wrap the output in brackets and places commas between the records
 
 ```bash
-/usr/bin/gpspipe -w | grep TPV | jq -s .
+gpspipe -w | grep TPV | jq -s '.'
 ```
