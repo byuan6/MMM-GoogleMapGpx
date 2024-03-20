@@ -11,8 +11,8 @@ module.exports = NodeHelper.create({
 
     //
     var self=this;
-    setInterval(()=>self.fetchGpxJson(),60000);
-    setInterval(()=>self.scheduleGpxPath(),60000);
+    //setInterval(()=>self.fetchGpxJson(),60000);
+    //setInterval(()=>self.scheduleGpxPath(),60000);
   },
 
   // Subclass socketNotificationReceived received.
@@ -37,9 +37,15 @@ module.exports = NodeHelper.create({
         this.fetchGpxPath();
       } else {
         self.sendSocketNotification('GOOGLEMAP_GPX_JSON', self.gpx);
-        self.sendSocketNotification('GOOGLEMAP_GPX_REVERSEGEO', self.reverseGeo);
-        self.sendSocketNotification('GOOGLEMAP_PATH_UPDATE', self.path);
+        if(self.reverseGeo)
+          self.sendSocketNotification('GOOGLEMAP_GPX_REVERSEGEO', self.reverseGeo);
+        if(self.path)
+          self.sendSocketNotification('GOOGLEMAP_PATH_UPDATE', self.path);
       }
+    } else if (notification === 'GOOGLEMAP_GPX_UPDATE') {
+      self.fetchGpxJson();
+    } else if (notification === 'GOOGLEMAP_LAST_PATH') {
+      this.fetchGpxPath();
     }
   },
 
@@ -89,7 +95,7 @@ module.exports = NodeHelper.create({
       return;
     }
 
-    var url=origin;
+    var url=this.url;
     http.get(url, res => {
       console.log("http callback handler for " + url);
       let data = [];

@@ -80,6 +80,25 @@ Add this entry to <MagicMirror root>/config/config.js, as entry in *modules: [* 
     },
 ```
 
+You can use the 2x sample path and GPS files in github, for gps location, as a sample of putting GPS location in URL.  You can use any URL, but we (mis-)use github as example.
+
+```js
+    {
+        module: "MMM-GoogleMapGpx",
+        header: "VanCave Tracker",
+        position: "top_left",
+        config: {
+            width: 400,
+            height: 300,
+            apikey: "<GOOGLE_API_KEY>",
+            marker: "marker2", // usually http://location, but marker1-6 has built in images
+            origin: "https://raw.githubusercontent.com/studio-1b/MMM-GoogleMapGpx/main/sample_gpx.json",
+            pathurl: "https://raw.githubusercontent.com/studio-1b/MMM-GoogleMapGpx/main/sample_path.json",
+        }
+    },
+```
+
+
 
 ## General options: 
 
