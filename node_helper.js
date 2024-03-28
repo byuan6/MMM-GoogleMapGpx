@@ -191,7 +191,13 @@ module.exports = NodeHelper.create({
               console.log('Response ended: ' + html.substring(0,100));
               //console.log('Response ended: ' + html);
               //console.log(html.indexOf('"status" : "OK"'));
+              if(self.html && self.html.length==html.length && self.html==html) {
+                console.log(self.name + " path had not changed, aborting update");
+                return;
+              }
               if(html.indexOf('{"class":"TPV"') != -1) {
+                self.html = html;
+
                 console.log(self.name + "good TPV, constructing GOOGLEMAP_PATH_UPDATE");
                 self.path=JSON.parse(html);
                 const path=self.path.data;
